@@ -1,0 +1,116 @@
+mysql> use payroll;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_payroll |
++-------------------+
+| administration    |
+| allowance         |
+| audit             |
+| deductions        |
+| employee          |
+| login             |
+| payments          |
++-------------------+
+7 rows in set (0.09 sec)
+
+mysql> desc administration;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| Admin_ID      | varchar(30) | NO   | PRI | NULL    |       |
+| First_Name    | varchar(45) | YES  |     | NULL    |       |
+| Last_Name     | varchar(45) | YES  |     | NULL    |       |
+| Email         | varchar(45) | YES  |     | NULL    |       |
+| Contact       | varchar(11) | YES  |     | NULL    |       |
+| Gender        | varchar(45) | YES  |     | NULL    |       |
+| DateOfBirth   | date        | YES  |     | NULL    |       |
+| DateOfJoining | date        | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+8 rows in set (0.10 sec)
+
+mysql> desc allowance;
++-----------------+---------------+------+-----+---------+----------------+
+| Field           | Type          | Null | Key | Default | Extra          |
++-----------------+---------------+------+-----+---------+----------------+
+| Allowance_ID    | int(11)       | NO   | PRI | NULL    | auto_increment |
+| Overtime        | decimal(30,0) | YES  |     | NULL    |                |
+| Medical         | decimal(30,0) | YES  |     | NULL    |                |
+| Bonus           | decimal(30,0) | YES  |     | NULL    |                |
+| Other           | decimal(30,0) | YES  |     | NULL    |                |
+| Employee_ID     | varchar(30)   | YES  | MUL | NULL    |                |
+| Salary          | decimal(30,0) | YES  |     | NULL    |                |
+| Rate            | decimal(30,0) | YES  |     | NULL    |                |
+| Total_Allowance | decimal(30,0) | YES  |     | NULL    |                |
+| First_Name      | varchar(45)   | YES  |     | NULL    |                |
+| Last_Name       | varchar(45)   | YES  |     | NULL    |                |
+| GivenBy         | varchar(45)   | YES  | MUL | NULL    |                |
++-----------------+---------------+------+-----+---------+----------------+
+12 rows in set (0.00 sec)
+
+mysql> desc audit;
++------------+-------------+------+-----+-------------------+-------------------+
+| Field      | Type        | Null | Key | Default           | Extra             |
++------------+-------------+------+-----+-------------------+-------------------+
+| AuditID    | int(11)     | NO   | PRI | NULL              | auto_increment    |
+| UserID     | varchar(30) | YES  |     | NULL              |                   |
+| Login_Time | datetime    | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
++------------+-------------+------+-----+-------------------+-------------------+
+3 rows in set (0.00 sec)
+
+mysql> desc deductions;
++------------------+-------------+------+-----+---------+----------------+
+| Field            | Type        | Null | Key | Default | Extra          |
++------------------+-------------+------+-----+---------+----------------+
+| Deduction_ID     | int(11)     | NO   | PRI | NULL    | auto_increment |
+| Employee_ID      | varchar(30) | YES  | MUL | NULL    |                |
+| First_Name       | varchar(45) | YES  |     | NULL    |                |
+| Last_Name        | varchar(45) | YES  |     | NULL    |                |
+| Salary           | int(11)     | YES  |     | NULL    |                |
+| Deduction_Amount | int(11)     | YES  |     | NULL    |                |
+| Deduction_Reason | varchar(45) | YES  |     | NULL    |                |
+| MadeBy           | varchar(45) | YES  | MUL | NULL    |                |
++------------------+-------------+------+-----+---------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> desc employee;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| Employee_ID | varchar(30) | NO   | PRI | NULL    |       |
+| First_Name  | varchar(30) | YES  |     | NULL    |       |
+| Middle_Name | varchar(45) | YES  |     | NULL    |       |
+| Last_name   | varchar(40) | YES  |     | NULL    |       |
+| Gender      | varchar(30) | YES  |     | NULL    |       |
+| DateOfBirth | varchar(10) | YES  |     | NULL    |       |
+| Contact     | varchar(10) | YES  |     | NULL    |       |
+| Email       | varchar(30) | YES  |     | NULL    |       |
+| Designation | varchar(30) | YES  |     | NULL    |       |
+| Hire_Date   | varchar(10) | YES  |     | NULL    |       |
+| Grade       | varchar(10) | YES  |     | NULL    |       |
+| Salary      | int(11)     | YES  |     | NULL    |       |
+| AddedBy     | varchar(45) | YES  | MUL | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+13 rows in set (0.00 sec)
+
+mysql> desc login;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| UserID   | varchar(30) | NO   | PRI | NULL    |       |
+| Password | varchar(45) | YES  |     | NULL    |       |
+| Division | varchar(45) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.06 sec)
+
+mysql> desc payments;
++--------------+-------------+------+-----+-------------------+-------------------+
+| Field        | Type        | Null | Key | Default           | Extra             |
++--------------+-------------+------+-----+-------------------+-------------------+
+| PaymentID    | int(11)     | NO   | PRI | NULL              | auto_increment    |
+| Payed_To     | varchar(45) | YES  | MUL | NULL              |                   |
+| Amount       | int(11)     | YES  |     | NULL              |                   |
+| Payed_By     | varchar(45) | YES  | MUL | NULL              |                   |
+| Payment_Time | datetime    | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
++--------------+-------------+------+-----+-------------------+-------------------+
+5 rows in set (0.00 sec)
